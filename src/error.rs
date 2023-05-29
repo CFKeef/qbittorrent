@@ -1,6 +1,3 @@
-use reqwest;
-use serde_json;
-
 use thiserror::Error as ThisError;
 
 #[derive(ThisError, Debug)]

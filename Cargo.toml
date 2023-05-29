@@ -2,7 +2,7 @@
 name = "qbittorrent"
 version = "0.2.0"
 authors = ["VanillaBrooks <brooks@karlik.org>"]
-edition = "2018"
+edition = "2021"
 description = "qbittorrent web api implementation"
 repository = "https://github.com/VanillaBrooks/qbittorrent"
 license = "MIT"
@@ -10,18 +10,18 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.104", features= ["derive"] }
-serde_json = "1.0.44"
-derive_builder = "0.11.2"
-reqwest = { version = "0.11.11", features = ["json"] }
+serde = { version = "1.0.163", features= ["derive"] }
+serde_json = "1.0.96"
+derive_builder = "0.12.0"
+reqwest = { version = "0.11.18", features = ["json"] }
 serde_urlencoded = "0.7.1"
-derive-getters = "0.2.0"
-async-trait = "0.1.22"
-thiserror = "1.0.11"
-tokio = { version=  "1.19.2", features=["macros", "rt"], optional=true }
+derive-getters = "0.3.0"
+async-trait = "0.1.68"
+thiserror = "1.0.40"
+tokio = { version=  "1.28.2", features=["macros", "rt"], optional=true }
 
 [dev-dependencies]
-tokio = {version=  "1.19.2", features=["macros", "rt"]}
+tokio = {version=  "1.28.2", features=["macros", "rt"]}
 
 [features]
 default = []

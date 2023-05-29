@@ -1,9 +1,15 @@
-use reqwest;
-use serde_json;
 use std::collections::BTreeMap;
+use std::collections::HashMap;
 
-// TODO: fix these to specifics
-use super::data::*;
+use serde_json::json;
+
+use crate::data::AlternateLimits;
+use crate::data::BuildInfo;
+use crate::data::Categories;
+use crate::data::GlobalTransferInfo;
+use crate::data::Log;
+use crate::data::Torrent;
+
 use super::error;
 use super::queries::*;
 
@@ -24,8 +30,18 @@ impl Api {
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert("Referer", address.parse()?);
 
-        let addr = push_own! {address, "/api/v2/auth/login", "?username=", username, "&password=", password};
-        let response = client.get(&addr).headers(headers).send().await?;
+        let addr = push_own! {address, "/api/v2/auth/login"};
+
+        let mut data = HashMap::new();
+        data.insert("username", username);
+        data.insert("password", password);
+
+        let response = client
+            .post(&addr)
+            .headers(headers)
+            .form(&data)
+            .send()
+            .await?;
 
         let headers = match response.headers().get("set-cookie") {
             Some(header) => header,
@@ -33,7 +49,7 @@ impl Api {
         };
 
         let cookie_str = headers.to_str()?;
-        let cookie_header = match cookie_str.find(";") {
+        let cookie_header = match cookie_str.find(';') {
             Some(index) => index,
             None => return Err(error::Error::MissingCookie),
         };
@@ -107,7 +123,6 @@ impl Api {
 
         Ok(log)
     }
-
 
     // #####
     // ##### Sync

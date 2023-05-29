@@ -3,7 +3,6 @@ use super::data;
 use super::error::Error;
 use super::queries;
 use super::traits::*;
-use tokio;
 
 fn _is_send<T: Send>(_: T) {}
 fn _is_sync<T: Sync>(_: T) {}
@@ -44,7 +43,7 @@ async fn get_first_torrent() -> (Api, data::Torrent) {
         .await
         .expect("could not get torrnet list");
 
-    let torrent = if let Some(_) = torrent_list.get(0) {
+    let torrent = if torrent_list.get(0).is_some() {
         torrent_list.remove(0)
     } else {
         panic! {"there were no items in the torrent list to check"}
@@ -136,12 +135,7 @@ async fn test_pause() {
         .unwrap();
 
     // filter the list of torrents for one that is actively uploading but not forced
-    let torrent = {
-        torrents
-            .into_iter()
-            .next()
-            .unwrap()
-    };
+    let torrent = { torrents.into_iter().next().unwrap() };
 
     dbg! {&torrent};
     let hash: data::Hash = (*torrent.hash()).clone();

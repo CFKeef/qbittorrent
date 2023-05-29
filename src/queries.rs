@@ -32,13 +32,13 @@ impl LogRequest {
     }
 }
 
-/// filter optional 	Filter torrent list. Allowed filters: all, downloading, completed, paused, active, inactive, 'resumed'
-/// category optional 	Get torrents with the given category (empty string means "without category"; no "category" parameter means "any category")
-/// sort optional 	Sort torrents by given key. All the possible keys are listed here below
-/// reverse optional 	Enable reverse sorting. Possible values are true and false (default)
-/// limit optional 	Limit the number of torrents returned
-/// offset optional 	Set offset (if less than 0, offset from end)
-/// hashes optional 	Filter by hashes. Can contain multiple hashes separated by |
+/// filter optional Filter torrent list. Allowed filters: all, downloading, completed, paused, active, inactive, 'resumed'
+/// category optional Get torrents with the given category (empty string means "without category"; no "category" parameter means "any category")
+/// sort optional Sort torrents by given key. All the possible keys are listed here below
+/// reverse optional Enable reverse sorting. Possible values are true and false (default)
+/// limit optional Limit the number of torrents returned
+/// offset optional Set offset (if less than 0, offset from end)
+/// hashes optional Filter by hashes. Can contain multiple hashes separated by |
 #[derive(Debug, Builder, Serialize, Deserialize, Clone, Default)]
 #[builder(setter(into, strip_option))]
 pub struct TorrentRequest {
@@ -62,7 +62,7 @@ pub struct TorrentRequest {
 impl TorrentRequest {
     // TODO: swap this to www_url_encoding crate
     fn url(&self) -> Result<String, error::Error> {
-        let url = serde_urlencoded::to_string(&self)?;
+        let url = serde_urlencoded::to_string(self)?;
         Ok(url)
     }
     pub async fn send(self, api: &Api) -> Result<Vec<Torrent>, Error> {
@@ -70,12 +70,12 @@ impl TorrentRequest {
 
         match self.url() {
             Ok(addition) => {
-                if addition != "".to_string() {
+                if addition != *"" {
                     addr.push('?');
                     addr.push_str(&addition);
                 }
             }
-            Err(e) => return Err(Error::from(e)),
+            Err(e) => return Err(e),
         }
 
         let res = api
@@ -118,20 +118,20 @@ impl Default for TorrentFilter {
 ///
 /// NOTE: You must include either a `urls` field or `torrents` field
 ///
-/// urls 	string 	URLs separated with newlines
-/// torrents 	raw 	Raw data of torrent file. torrents can be presented multiple times.
-/// savepath optional 	string 	Download folder
-/// cookie optional 	string 	Cookie sent to download the .torrent file
-/// category optional 	string 	Category for the torrent
-/// skip_checking optional 	string 	Skip hash checking. Possible values are true, false (default)
-/// paused optional 	string 	Add torrents in the paused state. Possible values are true, false (default)
-/// root_folder optional 	string 	Create the root folder. Possible values are true, false, unset (default)
-/// rename optional 	string 	Rename torrent
-/// upLimit optional 	integer 	Set torrent upload speed limit. Unit in bytes/second
-/// dlLimit optional 	integer 	Set torrent download speed limit. Unit in bytes/second
-/// autoTMM optional 	bool 	Whether Automatic Torrent Management should be used
-/// sequentialDownload optional 	string 	Enable sequential download. Possible values are true, false (default)
-/// firstLastPiecePrio optional 	string 	Prioritize download first last piece. Possible values are true, false (default)
+/// urls string URLs separated with newlines
+/// torrents raw Raw data of torrent file. torrents can be presented multiple times.
+/// savepath optional string Download folder
+/// cookie optional string Cookie sent to download the .torrent file
+/// category optional string Category for the torrent
+/// skip_checking optional string Skip hash checking. Possible values are true, false (default)
+/// paused optional string Add torrents in the paused state. Possible values are true, false (default)
+/// root_folder optional string Create the root folder. Possible values are true, false, unset (default)
+/// rename optional string Rename torrent
+/// upLimit optional integer Set torrent upload speed limit. Unit in bytes/second
+/// dlLimit optional integer Set torrent download speed limit. Unit in bytes/second
+/// autoTMM optional bool Whether Automatic Torrent Management should be used
+/// sequentialDownload optional string Enable sequential download. Possible values are true, false (default)
+/// firstLastPiecePrio optional string Prioritize download first last piece. Possible values are true, false (default)
 #[derive(Debug, Clone, Deserialize, Serialize, Builder, Default)]
 #[builder(setter(into, strip_option))]
 pub struct TorrentDownload {
@@ -172,6 +172,6 @@ pub struct TorrentDownload {
 
 impl TorrentDownload {
     pub async fn download(&self, api: &Api) -> Result<(), error::Error> {
-        api.add_new_torrent(&self).await
+        api.add_new_torrent(self).await
     }
 }

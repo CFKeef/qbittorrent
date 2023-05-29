@@ -1,11 +1,11 @@
-//! Structs returned by api queries
+//!  Structs  returned  by  api  queries
 
 use super::utils;
 use derive_getters::Getters;
 use serde::{Deserialize, Serialize};
 
-/// Overall metadata about this qbit client
-// TODO: fix struct definitions
+///  Overall  metadata  about  this  qbit  client
+//  TODO:  fix  struct  definitions
 #[derive(Debug, Deserialize, Getters)]
 pub struct MainData {
     rid: u64,
@@ -20,52 +20,52 @@ pub struct MainData {
     server_state: ServerState,
 }
 
-/// generic torrent information returned from get_all_torrents()
+///  generic  torrent  information  returned  from  get_all_torrents()
 ///
-/// ```norust
-/// added_on 	integer 	Time (Unix Epoch) when the torrent was added to the client
-/// amount_left 	integer 	Amount of data left to download (bytes)
-/// auto_tmm 	bool 	Whether this torrent is managed by Automatic Torrent Management
-/// category 	string 	Category of the torrent
-/// completed 	integer 	Amount of transfer data completed (bytes)
-/// completion_on 	integer 	Time (Unix Epoch) when the torrent completed
-/// dl_limit 	integer 	Torrent download speed limit (bytes/s). -1 if ulimited.
-/// dlspeed 	integer 	Torrent download speed (bytes/s)
-/// downloaded 	integer 	Amount of data downloaded
-/// downloaded_session 	integer 	Amount of data downloaded this session
-/// eta 	integer 	Torrent ETA (seconds)
-/// f_l_piece_prio 	bool 	True if first last piece are prioritized
-/// force_start 	bool 	True if force start is enabled for this torrent
-/// hash 	string 	Torrent hash
-/// last_activity 	integer 	Last time (Unix Epoch) when a chunk was downloaded/uploaded
-/// magnet_uri 	string 	Magnet URI corresponding to this torrent
-/// max_ratio 	float 	Maximum share ratio until torrent is stopped from seeding/uploading
-/// max_seeding_time 	integer 	Maximum seeding time (seconds) until torrent is stopped from seeding
-/// name 	string 	Torrent name
-/// num_complete 	integer 	Number of seeds in the swarm
-/// num_incomplete 	integer 	Number of leechers in the swarm
-/// num_leechs 	integer 	Number of leechers connected to
-/// num_seeds 	integer 	Number of seeds connected to
-/// priority 	integer 	Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode
-/// progress 	float 	Torrent progress (percentage/100)
-/// ratio 	float 	Torrent share ratio. Max ratio value: 9999.
-/// ratio_limit 	float 	TODO (what is different from max_ratio?)
-/// save_path 	string 	Path where this torrent's data is stored
-/// seeding_time_limit 	integer 	TODO (what is different from max_seeding_time?)
-/// seen_complete 	integer 	Time (Unix Epoch) when this torrent was last seen complete
-/// seq_dl 	bool 	True if sequential download is enabled
-/// size 	integer 	Total size (bytes) of files selected for download
-/// state 	string 	Torrent state. See table here below for the possible values
-/// super_seeding 	bool 	True if super seeding is enabled
-/// tags 	string 	Comma-concatenated tag list of the torrent
-/// time_active 	integer 	Total active time (seconds)
-/// total_size 	integer 	Total size (bytes) of all file in this torrent (including unselected ones)
-/// tracker 	string 	The first tracker with working status. (TODO: what is returned if no tracker is working?)
-/// up_limit 	integer 	Torrent upload speed limit (bytes/s). -1 if ulimited.
-/// uploaded 	integer 	Amount of data uploaded
-/// uploaded_session 	integer 	Amount of data uploaded this session
-/// upspeed 	integer 	Torrent upload speed (bytes/s)
-/// ```
+///  ```norust
+///  added_on      integer      Time  (Unix  Epoch)  when  the  torrent  was  added  to  the  client
+///  amount_left      integer      Amount  of  data  left  to  download  (bytes)
+///  auto_tmm      bool      Whether  this  torrent  is  managed  by  Automatic  Torrent  Management
+///  category      string      Category  of  the  torrent
+///  completed      integer      Amount  of  transfer  data  completed  (bytes)
+///  completion_on      integer      Time  (Unix  Epoch)  when  the  torrent  completed
+///  dl_limit      integer      Torrent  download  speed  limit  (bytes/s).  -1  if  ulimited.
+///  dlspeed      integer      Torrent  download  speed  (bytes/s)
+///  downloaded      integer      Amount  of  data  downloaded
+///  downloaded_session      integer      Amount  of  data  downloaded  this  session
+///  eta      integer      Torrent  ETA  (seconds)
+///  f_l_piece_prio      bool      True  if  first  last  piece  are  prioritized
+///  force_start      bool      True  if  force  start  is  enabled  for  this  torrent
+///  hash      string      Torrent  hash
+///  last_activity      integer      Last  time  (Unix  Epoch)  when  a  chunk  was  downloaded/uploaded
+///  magnet_uri      string      Magnet  URI  corresponding  to  this  torrent
+///  max_ratio      float      Maximum  share  ratio  until  torrent  is  stopped  from  seeding/uploading
+///  max_seeding_time      integer      Maximum  seeding  time  (seconds)  until  torrent  is  stopped  from  seeding
+///  name      string      Torrent  name
+///  num_complete      integer      Number  of  seeds  in  the  swarm
+///  num_incomplete      integer      Number  of  leechers  in  the  swarm
+///  num_leechs      integer      Number  of  leechers  connected  to
+///  num_seeds      integer      Number  of  seeds  connected  to
+///  priority      integer      Torrent  priority.  Returns  -1  if  queuing  is  disabled  or  torrent  is  in  seed  mode
+///  progress      float      Torrent  progress  (percentage/100)
+///  ratio      float      Torrent  share  ratio.  Max  ratio  value:  9999.
+///  ratio_limit      float      TODO  (what  is  different  from  max_ratio?)
+///  save_path      string      Path  where  this  torrent's  data  is  stored
+///  seeding_time_limit      integer      TODO  (what  is  different  from  max_seeding_time?)
+///  seen_complete      integer      Time  (Unix  Epoch)  when  this  torrent  was  last  seen  complete
+///  seq_dl      bool      True  if  sequential  download  is  enabled
+///  size      integer      Total  size  (bytes)  of  files  selected  for  download
+///  state      string      Torrent  state.  See  table  here  below  for  the  possible  values
+///  super_seeding      bool      True  if  super  seeding  is  enabled
+///  tags      string      Comma-concatenated  tag  list  of  the  torrent
+///  time_active      integer      Total  active  time  (seconds)
+///  total_size      integer      Total  size  (bytes)  of  all  file  in  this  torrent  (including  unselected  ones)
+///  tracker      string      The  first  tracker  with  working  status.  (TODO:  what  is  returned  if  no  tracker  is  working?)
+///  up_limit      integer      Torrent  upload  speed  limit  (bytes/s).  -1  if  ulimited.
+///  uploaded      integer      Amount  of  data  uploaded
+///  uploaded_session      integer      Amount  of  data  uploaded  this  session
+///  upspeed      integer      Torrent  upload  speed  (bytes/s)
+///  ```
 
 #[derive(Debug, Deserialize, Getters, Clone)]
 pub struct Torrent {
@@ -80,7 +80,7 @@ pub struct Torrent {
     downloaded: i64,
     downloaded_session: i64,
     eta: i64,
-    // will sometimes error if this is not option
+    //  will  sometimes  error  if  this  is  not  option
     f_l_piece_prio: Option<bool>,
     force_start: bool,
     pub(crate) hash: Hash,
@@ -114,30 +114,30 @@ pub struct Torrent {
     upspeed: i64,
 }
 
-/// Trackers associated with a torrent
+///  Trackers  associated  with  a  torrent
 ///
-/// ```norust
-/// url 	string 	Tracker url
-/// status 	integer 	Tracker status. See the table below for possible values
-/// tier 	integer 	Tracker priority tier. Lower tier trackers are tried before higher tiers
-/// num_peers 	integer 	Number of peers for current torrent, as reported by the tracker
-/// num_seeds 	integer 	Number of seeds for current torrent, asreported by the tracker
-/// num_leeches 	integer 	Number of leeches for current torrent, as reported by the tracker
-/// num_downloaded 	integer 	Number of completed downlods for current torrent, as reported by the tracker
-/// msg 	string 	Tracker message (there is no way of knowing what this message is - it's up to tracker admins)
-/// ```
+///  ```norust
+///  url      string      Tracker  url
+///  status      integer      Tracker  status.  See  the  table  below  for  possible  values
+///  tier      integer      Tracker  priority  tier.  Lower  tier  trackers  are  tried  before  higher  tiers
+///  num_peers      integer      Number  of  peers  for  current  torrent,  as  reported  by  the  tracker
+///  num_seeds      integer      Number  of  seeds  for  current  torrent,  asreported  by  the  tracker
+///  num_leeches      integer      Number  of  leeches  for  current  torrent,  as  reported  by  the  tracker
+///  num_downloaded      integer      Number  of  completed  downlods  for  current  torrent,  as  reported  by  the  tracker
+///  msg      string      Tracker  message  (there  is  no  way  of  knowing  what  this  message  is  -  it's  up  to  tracker  admins)
+///  ```
 #[derive(Serialize, Deserialize, Debug, Clone, Getters)]
 pub struct Tracker {
     url: String,
     #[getter(skip)]
     status: i32,
-    // TODO: fix this since some people do things non standard with "/" here
-    // tier: u32,
+    //  TODO:  fix  this  since  some  people  do  things  non  standard  with  "/"  here
+    //  tier:  u32,
     num_peers: i32,
-    // TODO: documentation says these will be returned but the fields do not appear
-    // num_seeds: i32,
-    // num_leeches: i32,
-    // num_downloaded: i64,
+    //  TODO:  documentation  says  these  will  be  returned  but  the  fields  do  not  appear
+    //  num_seeds:  i32,
+    //  num_leeches:  i32,
+    //  num_downloaded:  i64,
     msg: String,
 }
 impl Tracker {
@@ -153,7 +153,7 @@ impl Tracker {
     }
 }
 
-/// Working-status tracker for a particular torrent
+///  Working-status  tracker  for  a  particular  torrent
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum TrackerStatus {
     TrackerDisabled,
@@ -164,43 +164,43 @@ pub enum TrackerStatus {
     UnknownResponse,
 }
 
-/// Metadata about a torrent. returned from Torrent::properties()
+///  Metadata  about  a  torrent.  returned  from  Torrent::properties()
 ///
-/// ```norust
-/// save_path 	string 	Torrent save path
-/// creation_date 	integer 	Torrent creation date (Unix timestamp)
-/// piece_size 	integer 	Torrent piece size (bytes)
-/// comment 	string 	Torrent comment
-/// total_wasted 	integer 	Total data wasted for torrent (bytes)
-/// total_uploaded 	integer 	Total data uploaded for torrent (bytes)
-/// total_uploaded_session 	integer 	Total data uploaded this session (bytes)
-/// total_downloaded 	integer 	Total data uploaded for torrent (bytes)
-/// total_downloaded_session 	integer 	Total data downloaded this session (bytes)
-/// up_limit 	integer 	Torrent upload limit (bytes/s)
-/// dl_limit 	integer 	Torrent download limit (bytes/s)
-/// time_elapsed 	integer 	Torrent elapsed time (seconds)
-/// seeding_time 	integer 	Torrent elapsed time while complete (seconds)
-/// nb_connections 	integer 	Torrent connection count
-/// nb_connections_limit 	integer 	Torrent connection count limit
-/// share_ratio 	float 	Torrent share ratio
-/// addition_date API4 	integer 	When this torrent was added (unix timestamp)
-/// completion_date API4 	integer 	Torrent completion date (unix timestamp)
-/// created_by API4 	string 	Torrent creator
-/// dl_speed_avg API4 	integer 	Torrent average download speed (bytes/second)
-/// dl_speed API4 	integer 	Torrent download speed (bytes/second)
-/// eta API4 	integer 	Torrent ETA (seconds)
-/// last_seen API4 	integer 	Last seen complete date (unix timestamp)
-/// peers API4 	integer 	Number of peers connected to
-/// peers_total API4 	integer 	Number of peers in the swarm
-/// pieces_have API4 	integer 	Number of pieces owned
-/// pieces_num API4 	integer 	Number of pieces of the torrent
-/// reannounce API4 	integer 	Number of seconds until the next announce
-/// seeds API4 	integer 	Number of seeds connected to
-/// seeds_total API4 	integer 	Number of seeds in the swarm
-/// total_size API4 	integer 	Torrent total size (bytes)
-/// up_speed_avg API4 	integer 	Torrent average upload speed (bytes/second)
-/// up_speed API4 	integer 	Torrent upload speed (bytes/second)
-/// ```
+///  ```norust
+///  save_path      string      Torrent  save  path
+///  creation_date      integer      Torrent  creation  date  (Unix  timestamp)
+///  piece_size      integer      Torrent  piece  size  (bytes)
+///  comment      string      Torrent  comment
+///  total_wasted      integer      Total  data  wasted  for  torrent  (bytes)
+///  total_uploaded      integer      Total  data  uploaded  for  torrent  (bytes)
+///  total_uploaded_session      integer      Total  data  uploaded  this  session  (bytes)
+///  total_downloaded      integer      Total  data  uploaded  for  torrent  (bytes)
+///  total_downloaded_session      integer      Total  data  downloaded  this  session  (bytes)
+///  up_limit      integer      Torrent  upload  limit  (bytes/s)
+///  dl_limit      integer      Torrent  download  limit  (bytes/s)
+///  time_elapsed      integer      Torrent  elapsed  time  (seconds)
+///  seeding_time      integer      Torrent  elapsed  time  while  complete  (seconds)
+///  nb_connections      integer      Torrent  connection  count
+///  nb_connections_limit      integer      Torrent  connection  count  limit
+///  share_ratio      float      Torrent  share  ratio
+///  addition_date  API4      integer      When  this  torrent  was  added  (unix  timestamp)
+///  completion_date  API4      integer      Torrent  completion  date  (unix  timestamp)
+///  created_by  API4      string      Torrent  creator
+///  dl_speed_avg  API4      integer      Torrent  average  download  speed  (bytes/second)
+///  dl_speed  API4      integer      Torrent  download  speed  (bytes/second)
+///  eta  API4      integer      Torrent  ETA  (seconds)
+///  last_seen  API4      integer      Last  seen  complete  date  (unix  timestamp)
+///  peers  API4      integer      Number  of  peers  connected  to
+///  peers_total  API4      integer      Number  of  peers  in  the  swarm
+///  pieces_have  API4      integer      Number  of  pieces  owned
+///  pieces_num  API4      integer      Number  of  pieces  of  the  torrent
+///  reannounce  API4      integer      Number  of  seconds  until  the  next  announce
+///  seeds  API4      integer      Number  of  seeds  connected  to
+///  seeds_total  API4      integer      Number  of  seeds  in  the  swarm
+///  total_size  API4      integer      Torrent  total  size  (bytes)
+///  up_speed_avg  API4      integer      Torrent  average  upload  speed  (bytes/second)
+///  up_speed  API4      integer      Torrent  upload  speed  (bytes/second)
+///  ```
 #[derive(Clone, Debug, Deserialize, Serialize, Getters)]
 pub struct TorrentProperties {
     save_path: String,
@@ -238,29 +238,29 @@ pub struct TorrentProperties {
     up_speed: i64,
 }
 
-/// Current status of a torrent (downloading, errored, puased, etc)
+///  Current  status  of  a  torrent  (downloading,  errored,  puased,  etc)
 ///
-/// ```norust
-/// error 	Some error occurred, applies to paused torrents
-/// missingFiles 	Torrent data files is missing
-/// uploading 	Torrent is being seeded and data is being transferred
-/// pausedUP 	Torrent is paused and has finished downloading
-/// queuedUP 	Queuing is enabled and torrent is queued for upload
-/// stalledUP 	Torrent is being seeded, but no connection were made
-/// checkingUP 	Torrent has finished downloading and is being checked
-/// forcedUP 	Torrent is forced to uploading and ignore queue limit
-/// allocating 	Torrent is allocating disk space for download
-/// downloading 	Torrent is being downloaded and data is being transferred
-/// metaDL 	Torrent has just started downloading and is fetching metadata
-/// pausedDL 	Torrent is paused and has NOT finished downloading
-/// queuedDL 	Queuing is enabled and torrent is queued for download
-/// stalledDL 	Torrent is being downloaded, but no connection were made
-/// checkingDL 	Same as checkingUP, but torrent has NOT finished downloading
-/// forceDL 	Torrent is forced to downloading to ignore queue limit
-/// checkingResumeData 	Checking resume data on qBt startup
-/// moving 	Torrent is moving to another location
-/// unknown 	Unknown status
-/// ```
+///  ```norust
+///  error      Some  error  occurred,  applies  to  paused  torrents
+///  missingFiles      Torrent  data  files  is  missing
+///  uploading      Torrent  is  being  seeded  and  data  is  being  transferred
+///  pausedUP      Torrent  is  paused  and  has  finished  downloading
+///  queuedUP      Queuing  is  enabled  and  torrent  is  queued  for  upload
+///  stalledUP      Torrent  is  being  seeded,  but  no  connection  were  made
+///  checkingUP      Torrent  has  finished  downloading  and  is  being  checked
+///  forcedUP      Torrent  is  forced  to  uploading  and  ignore  queue  limit
+///  allocating      Torrent  is  allocating  disk  space  for  download
+///  downloading      Torrent  is  being  downloaded  and  data  is  being  transferred
+///  metaDL      Torrent  has  just  started  downloading  and  is  fetching  metadata
+///  pausedDL      Torrent  is  paused  and  has  NOT  finished  downloading
+///  queuedDL      Queuing  is  enabled  and  torrent  is  queued  for  download
+///  stalledDL      Torrent  is  being  downloaded,  but  no  connection  were  made
+///  checkingDL      Same  as  checkingUP,  but  torrent  has  NOT  finished  downloading
+///  forceDL      Torrent  is  forced  to  downloading  to  ignore  queue  limit
+///  checkingResumeData      Checking  resume  data  on  qBt  startup
+///  moving      Torrent  is  moving  to  another  location
+///  unknown      Unknown  status
+///  ```
 #[derive(Debug, Deserialize, Clone)]
 pub enum State {
     #[serde(rename = "error")]
@@ -303,18 +303,18 @@ pub enum State {
     Unknown,
 }
 
-/// Transfer stats for a torrent
+///  Transfer  stats  for  a  torrent
 ///
-/// ```norust
-/// dl_info_speed 	integer 	Global download rate (bytes/s)
-/// dl_info_data 	integer 	Data downloaded this session (bytes)
-/// up_info_speed 	integer 	Global upload rate (bytes/s)
-/// up_info_data 	integer 	Data uploaded this session (bytes)
-/// dl_rate_limit 	integer 	Download rate limit (bytes/s)
-/// up_rate_limit 	integer 	Upload rate limit (bytes/s)
-/// dht_nodes 	integer 	DHT nodes connected to
-/// connection_status 	string 	Connection status. See possible values here below
-/// ```
+///  ```norust
+///  dl_info_speed      integer      Global  download  rate  (bytes/s)
+///  dl_info_data      integer      Data  downloaded  this  session  (bytes)
+///  up_info_speed      integer      Global  upload  rate  (bytes/s)
+///  up_info_data      integer      Data  uploaded  this  session  (bytes)
+///  dl_rate_limit      integer      Download  rate  limit  (bytes/s)
+///  up_rate_limit      integer      Upload  rate  limit  (bytes/s)
+///  dht_nodes      integer      DHT  nodes  connected  to
+///  connection_status      string      Connection  status.  See  possible  values  here  below
+///  ```
 #[derive(Debug, Deserialize, Getters)]
 pub struct TransferInfo {
     dl_info_speed: u64,
@@ -327,36 +327,36 @@ pub struct TransferInfo {
     connection_status: ConnectionStatus,
 }
 
-/// Individual / Global torrent connection status
+///  Individual  /  Global  torrent  connection  status
 ///
-/// Possible values of connection_status:
-/// ```norust
-/// Value
-/// connected
-/// firewalled
-/// disconnected
-/// ```
+///  Possible  values  of  connection_status:
+///  ```norust
+///  Value
+///  connected
+///  firewalled
+///  disconnected
+///  ```
 #[derive(Debug, Deserialize)]
 pub enum ConnectionStatus {
-    #[serde(rename="connected")]
+    #[serde(rename = "connected")]
     Connected,
-    #[serde(rename="firewalled")]
+    #[serde(rename = "firewalled")]
     Firewalled,
-    #[serde(rename="disconnected")]
+    #[serde(rename = "disconnected")]
     Disconnected,
 }
 
-/// top-level torrent information
+///  top-level  torrent  information
 ///
-/// ```norust
-/// name 	string 	File name (including relative path)
-/// size 	integer 	File size (bytes)
-/// progress 	float 	File progress (percentage/100)
-/// priority 	integer 	File priority. See possible values here below
-/// is_seed 	bool 	True if file is seeding/complete
-/// piece_range 	integer array 	The first number is the starting piece index and the second number is the ending piece index (inclusive)
-/// availability 	float 	Percentage of file pieces currently available
-/// ```
+///  ```norust
+///  name      string      File  name  (including  relative  path)
+///  size      integer      File  size  (bytes)
+///  progress      float      File  progress  (percentage/100)
+///  priority      integer      File  priority.  See  possible  values  here  below
+///  is_seed      bool      True  if  file  is  seeding/complete
+///  piece_range      integer  array      The  first  number  is  the  starting  piece  index  and  the  second  number  is  the  ending  piece  index  (inclusive)
+///  availability      float      Percentage  of  file  pieces  currently  available
+///  ```
 #[derive(Debug, Deserialize, Serialize)]
 pub(crate) struct TorrentInfoSerde {
     name: String,
@@ -382,41 +382,41 @@ impl<'a> TorrentInfoSerde {
     }
 }
 
-/// Data on what the current download speeds and throttles are 
-// dl_info_speed 	integer 	Global download rate (bytes/s)
-// dl_info_data 	integer 	Data downloaded this session (bytes)
-// up_info_speed 	integer 	Global upload rate (bytes/s)
-// up_info_data 	integer 	Data uploaded this session (bytes)
-// dl_rate_limit 	integer 	Download rate limit (bytes/s)
-// up_rate_limit 	integer 	Upload rate limit (bytes/s)
-// dht_nodes 	integer 	DHT nodes connected to
-// connection_status 	string 	Connection status. See possible values here belowpub(crate) struct GlobalTransferInfo { }
+///  Data  on  what  the  current  download  speeds  and  throttles  are
+//  dl_info_speed      integer      Global  download  rate  (bytes/s)
+//  dl_info_data      integer      Data  downloaded  this  session  (bytes)
+//  up_info_speed      integer      Global  upload  rate  (bytes/s)
+//  up_info_data      integer      Data  uploaded  this  session  (bytes)
+//  dl_rate_limit      integer      Download  rate  limit  (bytes/s)
+//  up_rate_limit      integer      Upload  rate  limit  (bytes/s)
+//  dht_nodes      integer      DHT  nodes  connected  to
+//  connection_status      string      Connection  status.  See  possible  values  here  belowpub(crate)  struct  GlobalTransferInfo  {  }
 #[derive(Debug, Deserialize, Getters)]
 pub struct GlobalTransferInfo {
-    /// Global download rate (bytes/s)
+    ///  Global  download  rate  (bytes/s)
     dl_info_speed: i64,
-    /// Data downloaded this session (bytes)
+    ///  Data  downloaded  this  session  (bytes)
     dl_info_data: i64,
-    /// Global upload rate (bytes/s)
+    ///  Global  upload  rate  (bytes/s)
     up_info_speed: i64,
-    /// Data uploaded this session (bytes)
+    ///  Data  uploaded  this  session  (bytes)
     up_info_data: i64,
-    /// Download rate limit (bytes/s)
+    ///  Download  rate  limit  (bytes/s)
     dl_rate_limit: i64,
-    /// Upload rate limit (bytes/s)
+    ///  Upload  rate  limit  (bytes/s)
     up_rate_limit: i64,
-    /// DHT nodes connected to
+    ///  DHT  nodes  connected  to
     dht_nodes: i64,
-    connection_status: ConnectionStatus
+    connection_status: ConnectionStatus,
 }
 
-/// Whether or not alternat speed limits are enabled
+///  Whether  or  not  alternat  speed  limits  are  enabled
 #[derive(Debug)]
 pub enum AlternateLimits {
-    /// Alternative limits are in effect
+    ///  Alternative  limits  are  in  effect
     Enabled,
-    /// Run at full speed 
-    Disabled
+    ///  Run  at  full  speed
+    Disabled,
 }
 
 #[derive(Debug, Serialize, Getters)]
